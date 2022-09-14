@@ -1,4 +1,6 @@
 # toy set ~100 spots 
+
+# Set up
 **Note**  
 - updated script one of they ST_Simulate software to be more flexiable if the features did not match eactly between the two file inputs 
 - the csv file indexes were updated to be the ID_CB-vento18 to match those within the count matrix file
