@@ -3,9 +3,9 @@
 - updated script one of they ST_Simulate software to be more flexiable if the features did not match eactly between the two file inputs 
 - the csv file indexes were updated to be the ID_CB-vento18 to match those within the count matrix file
 
-**Step 1** split the data
-         mkdir toyData
-         python3.6 ../../ST_simulation/split_sc.py vento18_10x.processed.h5ad FetalMaternal-Decidua-cellType_BL.csv --annotation_col annotated_cell_identity.ontology_label --out_dir toyData/
+**Step 1** split the data  
+          mkdir toyData
+          python3.6 ../../ST_simulation/split_sc.py vento18_10x.processed.h5ad FetalMaternal-Decidua-cellType_BL.csv --annotation_col annotated_cell_identity.ontology_label --out_dir toyData/
 Seed = 59 749 507
 Total outputs = 12 and include:
 - counts_validation_{seed}.p
