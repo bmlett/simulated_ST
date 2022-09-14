@@ -8,7 +8,7 @@
 mkdir toyData
 python3.6 ../../ST_simulation/split_sc.py vento18_10x.processed.h5ad FetalMaternal-Decidua-cellType_BL.csv --annotation_col annotated_cell_identity.ontology_label --out_dir toyData/
 ```
-Seed = 59 749 507
+Seed = 59 749 507  
 Total outputs = 12 and include:
 - counts_validation_{seed}.p
 - labels_validation_{seed}.p
@@ -39,7 +39,7 @@ python3.6 ../../ST_simulation/assemble_composition.py 749 --tot_spots=100 --out_
 python3.6 ../../ST_simulation/assemble_composition.py 507 --tot_spots=100 --out_dir toyData/ --annotation_col annotated_cell_identity.ontology_label
 ```
 
-Total outputs 3 and include = 
+Total outputs 3 and include:  
 - synthetic_ST_seed59_1_composition.csv
 - synthetic_ST_seed749_1_composition.csv
 - synthetic_ST_seed507_1_composition.csv
@@ -51,7 +51,7 @@ python3.6 ../../ST_simulation/assemble_st.py 749 --out_dir toyData/ --annotation
 python3.6 ../../ST_simulation/assemble_st.py 507 --out_dir toyData/ --annotation_col annotated_cell_identity.ontology_label
 ```
 
-Total outputs 6 and include= 
+Total outputs 6 and include: 
 -  synthetic_ST_seed59_1_umis.csv
 -  synthetic_ST_seed59_1_counts.csv
 -  synthetic_ST_seed749_umis.csv
