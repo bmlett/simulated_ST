@@ -61,4 +61,10 @@ Total outputs 6 and include:
 -  synthetic_ST_seed507_1_umis.csv
 -  synthetic_ST_seed507_1_counts.csv
 
+# Data Exploration 
 
+```
+library("SingleCellExperiment")
+counts = read.csv("synthetic_ST_seed59_1_counts.csv")
+
+```
