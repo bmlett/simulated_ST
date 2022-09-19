@@ -63,8 +63,27 @@ Total outputs 6 and include:
 
 # Data Exploration 
 
+** REFORMAT ** 
+```
+library(data.table)
+d = fread("synthetic_ST_seed59_1_counts.csv")
+c = t(d)
+write.csv(c, "counts_ST_59.csv",quote=FALSE)
+```
+
+** Load in as SingleCellObject **
 ```
 library("SingleCellExperiment")
-counts = read.csv("synthetic_ST_seed59_1_counts.csv")
-
+ST_simCounts_59= read.csv("counts_ST_59.csv",skip=1,row.names=1)
+ST_simData_59=SingleCellExperiment(assays=list(counts=as.matrix(ST_simCounts_59)))
+colData(ST_simData_59)$totals=colSums(counts(ST_simData_59))
+rowData(ST_simData_59)$gene_totals = rowSums(counts(ST_simData_59))
+x = as.data.frame((rowData(ST_simData_59)$gene_totals))
+names(x) = c("gene_counts")
+x$genes= rownames(x)
+x2 = x[order(x$gene_counts, decreasing=T),]
 ```
+Total number of genes = 25,875
+Total number of genes expressed in spots = 15,152
+Total number of genes expressed in > 1000 spots = 89
+
