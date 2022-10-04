@@ -27,8 +27,8 @@ python3.6 ../../ST_simulation/assemble_design.py 507 --tot_spots 100 --annotatio
 Total outputs = 3 and include:
 - synthetic_ST_seed59_design.csv
 - synthetic_ST_seed749_design.csv
-- synthetic_ST_seed507_design.csv
-design used for the simulation and tncludes the following information: 
+- synthetic_ST_seed507_design.csv  
+design used for the simulation and includes the following information: 
 - uniform = is the cell type uniformly located across spots (1) or localized in a small subset of spots (0) 
 - density = is the cel type present in a spot at low desity (1) or high (0)
 - nspots = total number of spots in which the cell type is located 
@@ -46,7 +46,7 @@ Total outputs 3 and include:
 - synthetic_ST_seed749_1_composition.csv
 - synthetic_ST_seed507_1_composition.csv
 
-**Step 3** Assemble cell type composition per spot   
+**Step 4** Assemble simulated ST spots  
 ```
 python3.6 ../../ST_simulation/assemble_st.py 59 --out_dir toyData/ --annotation_col annotated_cell_identity.ontology_label
 python3.6 ../../ST_simulation/assemble_st.py 749 --out_dir toyData/ --annotation_col annotated_cell_identity.ontology_label
