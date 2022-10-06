@@ -5,13 +5,13 @@ params: args:myrg
 ---
 
 1. Install packages 
-```{r}
+```{r,echo=FALSE}
 library("SpatialExperiment")
 ```
 ### Set 1
 ## Toy Data seed 59
 2. Load in data 
-```{r}
+```{r label = "loading set 1 seed 59"}
 count = read.csv("set1/toy59/Counts_reformated.csv", sep=",")
 comp = read.csv("set1/toy59/synthetic_ST_seed59_1_composition.csv", sep = ",")
 ```
@@ -26,16 +26,18 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+```
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
 ```
 Explore cell type more
 ```{r}
@@ -46,7 +48,7 @@ comp$X[which(cT_sums >= 200)+1]
 
 ## Toy Data seed 507
 2. Load in data 
-```{r}
+```{r lable = "Loading set 1 seed 507"}
 count = read.csv("set1/toy507/Counts_reformated.csv", sep=",")
 comp = read.csv("set1/toy507/synthetic_ST_seed507_1_composition.csv", sep = ",")
 dim(count)
@@ -63,33 +65,30 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
 ```
-
-```{r}
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-```
-
-```{r}
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-```
-
-```{r}
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-
-
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
+```
+Explore cell type more
+```{r}
+summary(cT_sums)
+comp$X[which(cT_sums==0)+1]
+comp$X[which(cT_sums >= 200)+1]
 ```
 
 ## Toy Data seed 749
 
 2. Load in data 
-```{r}
+```{r lable="Loading set 1 seed 749}
 count = read.csv("set1/toy749/Counts_reformated.csv", sep=",")
 comp = read.csv("set1/toy749/synthetic_ST_seed749_1_composition.csv", sep = ",")
 dim(count)
@@ -106,23 +105,29 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+```
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-
-
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
+```
+Explore cell type more
+```{r}
+summary(cT_sums)
+comp$X[which(cT_sums==0)+1]
+comp$X[which(cT_sums >= 200)+1]
 ```
 ### Set 2
 ## Toy Data seed 416
 2. Load in data 
-```{r}
+```{r lable = "loading set 2 seed 416}
 count = read.csv("set2/toy416/Counts_reformated.csv", sep=",")
 comp = read.csv("set2/toy416/synthetic_ST_seed416_1_composition.csv", sep = ",")
 ```
@@ -137,16 +142,18 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+```
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
 ```
 Explore cell type more
 ```{r}
@@ -157,7 +164,7 @@ comp$X[which(cT_sums >= 200)+1]
 
 ## Toy Data seed 459
 2. Load in data 
-```{r}
+```{r lable = "loading set 2 seed 459"}
 count = read.csv("set2/toy459/Counts_reformated.csv", sep=",")
 comp = read.csv("set2/toy459/synthetic_ST_seed459_1_composition.csv", sep = ",")
 dim(count)
@@ -174,35 +181,32 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
 ```
-
-```{r}
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-```
-
-```{r}
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-```
-
-```{r}
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-
-
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
+```
+Explore cell type more
+```{r}
+summary(cT_sums)
+comp$X[which(cT_sums==0)+1]
+comp$X[which(cT_sums >= 200)+1]
 ```
 
 ## Toy Data seed 879
 
 2. Load in data 
-```{r}
+```{r lable = "Loading set 2 seed 879"}
 count = read.csv("set2/toy879/Counts_reformated.csv", sep=",")
-comp = read.csv("set2/toy879/synthetic_ST_seed879_composition.csv", sep = ",")
+comp = read.csv("set2/toy879/synthetic_ST_seed879_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
 ```
@@ -217,24 +221,30 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+```
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-
-
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
+```
+Explore cell type more
+```{r}
+summary(cT_sums)
+comp$X[which(cT_sums==0)+1]
+comp$X[which(cT_sums >= 200)+1]
 ```
 
 ### Set 3  
 ## Toy Data seed 108
 2. Load in data 
-```{r}
+```{r lable = "Loading set 3 seed 108"}
 count = read.csv("set3/toy108/Counts_reformated.csv", sep=",")
 comp = read.csv("set3/toy108/synthetic_ST_seed108_1_composition.csv", sep = ",")
 ```
@@ -249,16 +259,18 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+```
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
 ```
 Explore cell type more
 ```{r}
@@ -269,7 +281,7 @@ comp$X[which(cT_sums >= 200)+1]
 
 ## Toy Data seed 411
 2. Load in data 
-```{r}
+```{r lable = "Loading set 3 seed 411"}
 count = read.csv("set3/toy411/Counts_reformated.csv", sep=",")
 comp = read.csv("set3/toy411/synthetic_ST_seed411_1_composition.csv", sep = ",")
 dim(count)
@@ -286,33 +298,30 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
 ```
-
-```{r}
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-```
-
-```{r}
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-```
-
-```{r}
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-
-
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
+```
+Explore cell type more
+```{r}
+summary(cT_sums)
+comp$X[which(cT_sums==0)+1]
+comp$X[which(cT_sums >= 200)+1]
 ```
 
 ## Toy Data seed 598
 
 2. Load in data 
-```{r}
+```{r lable = "Loading set 3 seed 598"}
 count = read.csv("set3/toy598/Counts_reformated.csv", sep=",")
 comp = read.csv("set3/toy598/synthetic_ST_seed598_1_composition.csv", sep = ",")
 dim(count)
@@ -329,16 +338,22 @@ count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
-plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
-plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
-plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
-plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+```
+``{r}
+plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-
-
 ```{r}
-hist(count_sums)
-hist(spot_sums)
-hist(cT_sums)
+hist(count_sums, main="Distribution of summed counter per spot")
+hist(spot_sums, main="Distribution of summed cell types per spot")
+hist(cT_sums,main="Distribution of counter per cell type")
+```
+Explore cell type more
+```{r}
+summary(cT_sums)
+comp$X[which(cT_sums==0)+1]
+comp$X[which(cT_sums >= 200)+1]
 ```
