@@ -88,7 +88,7 @@ comp$X[which(cT_sums >= 200)+1]
 ## Toy Data seed 749
 
 2. Load in data 
-```{r lable="Loading set 1 seed 749}
+```{r lable="Loading set 1 seed 749"}
 count = read.csv("set1/toy749/Counts_reformated.csv", sep=",")
 comp = read.csv("set1/toy749/synthetic_ST_seed749_1_composition.csv", sep = ",")
 dim(count)
@@ -127,7 +127,7 @@ comp$X[which(cT_sums >= 200)+1]
 ### Set 2
 ## Toy Data seed 416
 2. Load in data 
-```{r lable = "loading set 2 seed 416}
+```{r lable = "loading set 2 seed 416"}
 count = read.csv("set2/toy416/Counts_reformated.csv", sep=",")
 comp = read.csv("set2/toy416/synthetic_ST_seed416_1_composition.csv", sep = ",")
 ```
