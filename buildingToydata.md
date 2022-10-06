@@ -61,29 +61,60 @@ Total outputs 6 and include:
 -  synthetic_ST_seed507_1_umis.csv
 -  synthetic_ST_seed507_1_counts.csv
 
-# Data Exploration 
+## Set2
 
-** REFORMAT ** 
+**Step 1** split the data for another set of spots 
 ```
-library(data.table)
-d = fread("synthetic_ST_seed59_1_counts.csv")
-c = t(d)
-write.csv(c, "counts_ST_59.csv",quote=FALSE)
+mkdir set2
+python3.6 ../../ST_simulation/split_sc.py vento18_10x.processed.h5ad FetalMaternal-Decidua-cellType_BL.csv --annotation_col annotated_cell_identity.ontology_label --out_dir set2/
+```
+Seed = 416 459 879  
+**Step 2** design matrix  
+```
+python3.6 ../../ST_simulation/assemble_design.py 416 --tot_spots 100 --annotation_col annotated_cell_identity.ontology_label --out_dir set2/
+python3.6 ../../ST_simulation/assemble_design.py 459 --tot_spots 100 --annotation_col annotated_cell_identity.ontology_label --out_dir set2/
+python3.6 ../../ST_simulation/assemble_design.py 879 --tot_spots 100 --annotation_col annotated_cell_identity.ontology_label --out_dir set2/
 ```
 
-** Load in as SingleCellObject **
+**Step 3** Assemble cell type composition per spot   
 ```
-library("SingleCellExperiment")
-ST_simCounts_59= read.csv("counts_ST_59.csv",skip=1,row.names=1)
-ST_simData_59=SingleCellExperiment(assays=list(counts=as.matrix(ST_simCounts_59)))
-colData(ST_simData_59)$totals=colSums(counts(ST_simData_59))
-rowData(ST_simData_59)$gene_totals = rowSums(counts(ST_simData_59))
-x = as.data.frame((rowData(ST_simData_59)$gene_totals))
-names(x) = c("gene_counts")
-x$genes= rownames(x)
-x2 = x[order(x$gene_counts, decreasing=T),]
+python3.6 ../../ST_simulation/assemble_composition.py 416 --tot_spots=100 --out_dir set2/ --annotation_col annotated_cell_identity.ontology_label
+python3.6 ../../ST_simulation/assemble_composition.py 459 --tot_spots=100 --out_dir set2/ --annotation_col annotated_cell_identity.ontology_label
+python3.6 ../../ST_simulation/assemble_composition.py 879 --tot_spots=100 --out_dir set2/ --annotation_col annotated_cell_identity.ontology_label
 ```
-Total number of genes = 25,875
-Total number of genes expressed in spots = 15,152
-Total number of genes expressed in > 1000 spots = 89
 
+**Step 4** Assemble simulated ST spots  
+```
+python3.6 ../../ST_simulation/assemble_st.py 416 --out_dir set2/ --annotation_col annotated_cell_identity.ontology_label
+python3.6 ../../ST_simulation/assemble_st.py 459 --out_dir set2/ --annotation_col annotated_cell_identity.ontology_label
+python3.6 ../../ST_simulation/assemble_st.py 879 --out_dir set2/ --annotation_col annotated_cell_identity.ontology_label
+```
+
+## Set3
+
+**Step 1** split the data for another set of spots 
+```
+mkdir set3
+python3.6 ../../ST_simulation/split_sc.py vento18_10x.processed.h5ad FetalMaternal-Decidua-cellType_BL.csv --annotation_col annotated_cell_identity.ontology_label --out_dir set3/
+```
+Seed = 108 598 411
+**Step 2** design matrix  
+```
+python3.6 ../../ST_simulation/assemble_design.py 108 --tot_spots 100 --annotation_col annotated_cell_identity.ontology_label --out_dir set3/
+python3.6 ../../ST_simulation/assemble_design.py 598 --tot_spots 100 --annotation_col annotated_cell_identity.ontology_label --out_dir set3/
+python3.6 ../../ST_simulation/assemble_design.py 411 --tot_spots 100 --annotation_col annotated_cell_identity.ontology_label --out_dir set3/
+```
+
+**Step 3** Assemble cell type composition per spot   
+```
+python3.6 ../../ST_simulation/assemble_composition.py 108 --tot_spots=100 --out_dir set3/ --annotation_col annotated_cell_identity.ontology_label
+python3.6 ../../ST_simulation/assemble_composition.py 598 --tot_spots=100 --out_dir set3/ --annotation_col annotated_cell_identity.ontology_label
+python3.6 ../../ST_simulation/assemble_composition.py 411 --tot_spots=100 --out_dir set3/ --annotation_col annotated_cell_identity.ontology_label
+```
+
+**Step 4** Assemble simulated ST spots  
+```
+python3.6 ../../ST_simulation/assemble_st.py 108 --out_dir set3/ --annotation_col annotated_cell_identity.ontology_label
+python3.6 ../../ST_simulation/assemble_st.py 598 --out_dir set3/ --annotation_col annotated_cell_identity.ontology_label
+python3.6 ../../ST_simulation/assemble_st.py 411 --out_dir set3/ --annotation_col annotated_cell_identity.ontology_label
+```
