@@ -12,8 +12,8 @@ library("SpatialExperiment")
 ## Toy Data seed 59
 2. Load in data 
 ```{r}
-count = read.csv("toy59/Counts_reformated.csv", sep=",")
-comp = read.csv("toy59/s.3/synthetic_ST_seed59_1_composition.csv", sep = ",")
+count = read.csv("set1/toy59/Counts_reformated.csv", sep=",")
+comp = read.csv("set1/toy59/synthetic_ST_seed59_1_composition.csv", sep = ",")
 ```
 About the data... 
 c is the file containing count information with each row being genes (25,874) and each column spots (100)
@@ -48,7 +48,7 @@ comp$X[which(cT_sums >= 200)+1]
 2. Load in data 
 ```{r}
 count = read.csv("set1/toy507/Counts_reformated.csv", sep=",")
-comp = read.csv("set1/toy507/s.3/synthetic_ST_seed507_1_composition.csv", sep = ",")
+comp = read.csv("set1/toy507/synthetic_ST_seed507_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
 ```
@@ -91,7 +91,7 @@ hist(cT_sums)
 2. Load in data 
 ```{r}
 count = read.csv("set1/toy749/Counts_reformated.csv", sep=",")
-comp = read.csv("set1/toy749/s.3/synthetic_ST_seed749_1_composition.csv", sep = ",")
+comp = read.csv("set1/toy749/synthetic_ST_seed749_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
 ```
