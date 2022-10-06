@@ -12,7 +12,7 @@ library("SpatialExperiment")
 ## Toy Data seed 59
 2. Load in data 
 ```{r}
-count = read.csv2("toy59/Counts_reformated.csv", sep=",")
+count = read.csv("toy59/Counts_reformated.csv", sep=",")
 comp = read.csv("toy59/s.3/synthetic_ST_seed59_1_composition.csv", sep = ",")
 ```
 About the data... 
@@ -47,7 +47,7 @@ comp$X[which(cT_sums >= 200)+1]
 ## Toy Data seed 507
 2. Load in data 
 ```{r}
-count = read.csv2("set1/toy507/Counts_reformated.csv", sep=",")
+count = read.csv("set1/toy507/Counts_reformated.csv", sep=",")
 comp = read.csv("set1/toy507/s.3/synthetic_ST_seed507_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
@@ -90,7 +90,7 @@ hist(cT_sums)
 
 2. Load in data 
 ```{r}
-count = read.csv2("set1/toy749/Counts_reformated.csv", sep=",")
+count = read.csv("set1/toy749/Counts_reformated.csv", sep=",")
 comp = read.csv("set1/toy749/s.3/synthetic_ST_seed749_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
@@ -123,7 +123,7 @@ hist(cT_sums)
 ## Toy Data seed 416
 2. Load in data 
 ```{r}
-count = read.csv2("set2/toy416/Counts_reformated.csv", sep=",")
+count = read.csv("set2/toy416/Counts_reformated.csv", sep=",")
 comp = read.csv("set2/toy416/synthetic_ST_seed416_1_composition.csv", sep = ",")
 ```
 About the data... 
@@ -158,7 +158,7 @@ comp$X[which(cT_sums >= 200)+1]
 ## Toy Data seed 459
 2. Load in data 
 ```{r}
-count = read.csv2("set2/toy459/Counts_reformated.csv", sep=",")
+count = read.csv("set2/toy459/Counts_reformated.csv", sep=",")
 comp = read.csv("set2/toy459/synthetic_ST_seed459_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
@@ -201,7 +201,7 @@ hist(cT_sums)
 
 2. Load in data 
 ```{r}
-count = read.csv2("set2/toy879/Counts_reformated.csv", sep=",")
+count = read.csv("set2/toy879/Counts_reformated.csv", sep=",")
 comp = read.csv("set2/toy879/synthetic_ST_seed879_composition.csv", sep = ",")
 dim(count)
 dim(comp)
@@ -235,7 +235,7 @@ hist(cT_sums)
 ## Toy Data seed 108
 2. Load in data 
 ```{r}
-count = read.csv2("set3/toy108/Counts_reformated.csv", sep=",")
+count = read.csv("set3/toy108/Counts_reformated.csv", sep=",")
 comp = read.csv("set3/toy108/synthetic_ST_seed108_1_composition.csv", sep = ",")
 ```
 About the data... 
@@ -270,7 +270,7 @@ comp$X[which(cT_sums >= 200)+1]
 ## Toy Data seed 411
 2. Load in data 
 ```{r}
-count = read.csv2("set3/toy411/Counts_reformated.csv", sep=",")
+count = read.csv("set3/toy411/Counts_reformated.csv", sep=",")
 comp = read.csv("set3/toy411/synthetic_ST_seed411_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
@@ -313,7 +313,7 @@ hist(cT_sums)
 
 2. Load in data 
 ```{r}
-count = read.csv2("set3/toy598/Counts_reformated.csv", sep=",")
+count = read.csv("set3/toy598/Counts_reformated.csv", sep=",")
 comp = read.csv("set3/toy598/synthetic_ST_seed598_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
