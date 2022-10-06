@@ -27,7 +27,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
@@ -66,7 +66,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
@@ -106,7 +106,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
@@ -143,7 +143,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
@@ -182,7 +182,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
@@ -222,7 +222,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
@@ -260,7 +260,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
@@ -299,7 +299,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
@@ -339,7 +339,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-``{r}
+```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
 plot(cT_sums, main="Scatter of counts per cell type" xlab = "Cell type", ylab="Total counts per cell Type")
