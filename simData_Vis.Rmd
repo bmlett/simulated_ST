@@ -1,6 +1,7 @@
 ---
 title: "Simulation data visulitaion"
 output: html_notebook
+params: args:myrg
 ---
 
 1. Install packages 
