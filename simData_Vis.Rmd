@@ -7,7 +7,7 @@ output: html_notebook
 ```{r}
 library("SpatialExperiment")
 ```
-
+### Set 1
 ## Toy Data seed 59
 2. Load in data 
 ```{r}
@@ -46,8 +46,8 @@ comp$X[which(cT_sums >= 200)+1]
 ## Toy Data seed 507
 2. Load in data 
 ```{r}
-count = read.csv2("toy507/Counts_reformated.csv", sep=",")
-comp = read.csv("toy507/s.3/synthetic_ST_seed507_1_composition.csv", sep = ",")
+count = read.csv2("set1/toy507/Counts_reformated.csv", sep=",")
+comp = read.csv("set1/toy507/s.3/synthetic_ST_seed507_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
 ```
@@ -89,8 +89,231 @@ hist(cT_sums)
 
 2. Load in data 
 ```{r}
-count = read.csv2("toy749/Counts_reformated.csv", sep=",")
-comp = read.csv("toy749/s.3/synthetic_ST_seed749_1_composition.csv", sep = ",")
+count = read.csv2("set1/toy749/Counts_reformated.csv", sep=",")
+comp = read.csv("set1/toy749/s.3/synthetic_ST_seed749_1_composition.csv", sep = ",")
+dim(count)
+dim(comp)
+```
+About the data... 
+c is the file containing count information with each row being genes (25,874) and each column spots (100)
+
+comp is the file containing cell type information with each row being a cell type (11) and each column the number per spot (100)
+
+3. Data exploration
+```{r}
+count_sums = colSums(count[2:25875,2:101])
+gene_sums = rowSums(count[2:25875,2:101])
+spot_sums = colSums(comp[2:12,2:101])
+cT_sums = rowSums(comp[2:12,2:101])
+plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+abline(h=mean(gene_sums),col="red")
+```
+
+
+```{r}
+hist(count_sums)
+hist(spot_sums)
+hist(cT_sums)
+```
+### Set 2
+## Toy Data seed 416
+2. Load in data 
+```{r}
+count = read.csv2("set2/toy416/Counts_reformated.csv", sep=",")
+comp = read.csv("set2/toy416/synthetic_ST_seed416_1_composition.csv", sep = ",")
+```
+About the data... 
+c is the file containing count information with each row being genes (25,874) and each column spots (100)
+
+comp is the file containing cell type information with each row being a cell type (11) and each column the number per spot (100)
+
+3. Data exploration
+```{r}
+count_sums = colSums(count[2:25875,2:101])
+gene_sums = rowSums(count[2:25875,2:101])
+spot_sums = colSums(comp[2:12,2:101])
+cT_sums = rowSums(comp[2:12,2:101])
+plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+abline(h=mean(gene_sums),col="red")
+```
+```{r}
+hist(count_sums)
+hist(spot_sums)
+hist(cT_sums)
+```
+Explore cell type more
+```{r}
+summary(cT_sums)
+comp$X[which(cT_sums==0)+1]
+comp$X[which(cT_sums >= 200)+1]
+```
+
+## Toy Data seed 459
+2. Load in data 
+```{r}
+count = read.csv2("set2/toy459/Counts_reformated.csv", sep=",")
+comp = read.csv("set2/toy459/synthetic_ST_seed459_1_composition.csv", sep = ",")
+dim(count)
+dim(comp)
+```
+About the data... 
+c is the file containing count information with each row being genes (25,874) and each column spots (100)
+
+comp is the file containing cell type information with each row being a cell type (11) and each column the number per spot (100)
+
+3. Data exploration
+```{r}
+count_sums = colSums(count[2:25875,2:101])
+gene_sums = rowSums(count[2:25875,2:101])
+spot_sums = colSums(comp[2:12,2:101])
+cT_sums = rowSums(comp[2:12,2:101])
+plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
+```
+
+```{r}
+plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
+```
+
+```{r}
+plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
+```
+
+```{r}
+plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+abline(h=mean(gene_sums),col="red")
+```
+
+
+```{r}
+hist(count_sums)
+hist(spot_sums)
+hist(cT_sums)
+```
+
+## Toy Data seed 879
+
+2. Load in data 
+```{r}
+count = read.csv2("set2/toy879/Counts_reformated.csv", sep=",")
+comp = read.csv("set2/toy879/synthetic_ST_seed879_composition.csv", sep = ",")
+dim(count)
+dim(comp)
+```
+About the data... 
+c is the file containing count information with each row being genes (25,874) and each column spots (100)
+
+comp is the file containing cell type information with each row being a cell type (11) and each column the number per spot (100)
+
+3. Data exploration
+```{r}
+count_sums = colSums(count[2:25875,2:101])
+gene_sums = rowSums(count[2:25875,2:101])
+spot_sums = colSums(comp[2:12,2:101])
+cT_sums = rowSums(comp[2:12,2:101])
+plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+abline(h=mean(gene_sums),col="red")
+```
+
+
+```{r}
+hist(count_sums)
+hist(spot_sums)
+hist(cT_sums)
+```
+
+### Set 3  
+## Toy Data seed 108
+2. Load in data 
+```{r}
+count = read.csv2("set3/toy108/Counts_reformated.csv", sep=",")
+comp = read.csv("set3/toy108/synthetic_ST_seed108_1_composition.csv", sep = ",")
+```
+About the data... 
+c is the file containing count information with each row being genes (25,874) and each column spots (100)
+
+comp is the file containing cell type information with each row being a cell type (11) and each column the number per spot (100)
+
+3. Data exploration
+```{r}
+count_sums = colSums(count[2:25875,2:101])
+gene_sums = rowSums(count[2:25875,2:101])
+spot_sums = colSums(comp[2:12,2:101])
+cT_sums = rowSums(comp[2:12,2:101])
+plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
+plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
+plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
+plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+abline(h=mean(gene_sums),col="red")
+```
+```{r}
+hist(count_sums)
+hist(spot_sums)
+hist(cT_sums)
+```
+Explore cell type more
+```{r}
+summary(cT_sums)
+comp$X[which(cT_sums==0)+1]
+comp$X[which(cT_sums >= 200)+1]
+```
+
+## Toy Data seed 411
+2. Load in data 
+```{r}
+count = read.csv2("set3/toy411/Counts_reformated.csv", sep=",")
+comp = read.csv("set3/toy411/synthetic_ST_seed411_1_composition.csv", sep = ",")
+dim(count)
+dim(comp)
+```
+About the data... 
+c is the file containing count information with each row being genes (25,874) and each column spots (100)
+
+comp is the file containing cell type information with each row being a cell type (11) and each column the number per spot (100)
+
+3. Data exploration
+```{r}
+count_sums = colSums(count[2:25875,2:101])
+gene_sums = rowSums(count[2:25875,2:101])
+spot_sums = colSums(comp[2:12,2:101])
+cT_sums = rowSums(comp[2:12,2:101])
+plot(count_sums,xlab="Spots", ylab="Gene counts per spot (sum)")
+```
+
+```{r}
+plot(spot_sums,xlab="Spots", ylab="Cell Type counts per spot (sum)")
+```
+
+```{r}
+plot(cT_sums, xlab = "Cell type", ylab="Total counts per cell Type")
+```
+
+```{r}
+plot(gene_sums,xlab="Genes", ylab="Total counts per gene")
+abline(h=mean(gene_sums),col="red")
+```
+
+
+```{r}
+hist(count_sums)
+hist(spot_sums)
+hist(cT_sums)
+```
+
+## Toy Data seed 598
+
+2. Load in data 
+```{r}
+count = read.csv2("set3/toy598/Counts_reformated.csv", sep=",")
+comp = read.csv("set3/toy598/synthetic_ST_seed598_1_composition.csv", sep = ",")
 dim(count)
 dim(comp)
 ```
