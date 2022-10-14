@@ -103,9 +103,12 @@ for (i in 1:length(comp[,1])) {
   if(length(x) > 1){
    genes = count[,x+1]
    df2[,i]= rowSums(genes)
+   } else if(length(x) ==1) {
+   df2[,i]= count[,x+1]
    } else {
-   df2[,i]= count[,x+1]}
-}
+   print("Counts zero")
+   df2[,i] = 0 }
+} 
 ```
 Explore cell type more
 ```{r}
