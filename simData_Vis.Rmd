@@ -8,6 +8,7 @@ params: args:myrg
 ```{r include=FALSE}
 library("SpatialExperiment")
 library(ggplot2)
+library(gridExtra)
 library(dbplyr)
 ```
 ### Set 1
