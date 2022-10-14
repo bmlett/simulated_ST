@@ -48,8 +48,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df1[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df1[,i]= rowSums(genes)
+   } else {
+   df1[,i]= count[,x+1]}
 }
 ```
 Explore cell type more
@@ -94,8 +97,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df2[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df2[,i]= rowSums(genes)
+   } else {
+   df2[,i]= count[,x+1]}
 }
 ```
 Explore cell type more
@@ -140,8 +146,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df3[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df3[,i]= rowSums(genes)
+   } else {
+   df3[,i]= count[,x+1]}
 }
 ```
 
@@ -204,8 +213,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df1[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df1[,i]= rowSums(genes)
+   } else {
+   df1[,i]= count[,x+1]}
 }
 ```
 Explore cell type more
@@ -248,8 +260,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df2[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df2[,i]= rowSums(genes)
+   } else {
+   df2[,i]= count[,x+1]}
 }
 ```
 Explore cell type more
@@ -293,8 +308,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df3[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df3[,i]= rowSums(genes)
+   } else {
+   df3[,i]= count[,x+1]}
 }
 ```
 
@@ -356,8 +374,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df1[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df1[,i]= rowSums(genes)
+   } else {
+   df1[,i]= count[,x+1]}
 }
 ```
 Explore cell type more
@@ -400,8 +421,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df2[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df2[,i]= rowSums(genes)
+   } else {
+   df2[,i]= count[,x+1]}
 }
 ```
 Explore cell type more
@@ -445,8 +469,11 @@ for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
-  genes = count[,x+1]
-  df3[,i]= rowSums(genes)
+  if(length(x) > 1){
+   genes = count[,x+1]
+   df3[,i]= rowSums(genes)
+   } else {
+   df3[,i]= count[,x+1]}
 }
 ```
 
