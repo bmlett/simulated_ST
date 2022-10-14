@@ -27,13 +27,12 @@ comp is the file containing cell type information with each row being a cell typ
 spe - class spatial experiment 
 
 3. Data exploration
-```{r}
+```{r }
 count_sums = colSums(count[2:25875,2:101])
 gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
-
 
 ```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
@@ -43,9 +42,8 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 
-
 ```{r include=FALSE}
-df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp$X)))
+df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
@@ -91,11 +89,11 @@ abline(h=mean(gene_sums),col="red")
 ```
 
 ```{r include=FALSE}
-df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp$X)))
-for (i in 1:length(comp$X)) {
+df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df2[,i]= rowSums(genes)
 }
@@ -137,11 +135,11 @@ abline(h=mean(gene_sums),col="red")
 ```
 
 ```{r include=FALSE}
-df3 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp$X)))
-for (i in 1:length(comp$X)) {
+df3 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df3[,i]= rowSums(genes)
 }
@@ -202,10 +200,10 @@ abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
 df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
-for (i in 1:length(comp$X)) {
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df1[,i]= rowSums(genes)
 }
@@ -246,10 +244,10 @@ abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
 df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
-for (i in 1:length(comp$X)) {
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df2[,i]= rowSums(genes)
 }
@@ -291,10 +289,10 @@ abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
 df3 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
-for (i in 1:length(comp$X)) {
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df3[,i]= rowSums(genes)
 }
@@ -354,10 +352,10 @@ abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
 df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
-for (i in 1:length(comp$X)) {
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df1[,i]= rowSums(genes)
 }
@@ -398,10 +396,10 @@ abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
 df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
-for (i in 1:length(comp$X)) {
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df2[,i]= rowSums(genes)
 }
