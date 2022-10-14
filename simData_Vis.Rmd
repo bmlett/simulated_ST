@@ -16,7 +16,7 @@ library(dbplyr)
 ```{r label = "loading set 1 seed 59"}
 count = read.csv("set1/toy59/Counts_reformated.csv", sep=",")
 comp = read.csv("set1/toy59/synthetic_ST_seed59_1_composition.csv", sep = ",")
-geneNamesKey = data.frame("KEY" = 1:dim(count)[1], "Value"= count$X)
+geneNamesKey = data.frame("KEY" = 1:dim(count)[1], "Value"=  count[,1])
  #spe = SpatialExperiment(assays=count[,2:101], rowData = geneNames)
 ```
 About the data... 
@@ -45,11 +45,11 @@ abline(h=mean(gene_sums),col="red")
 
 
 ```{r include=FALSE}
-df1 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
-for (i in 1:length(comp$X)) {
+df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp$X)))
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df1[,i]= rowSums(genes)
 }
@@ -91,7 +91,7 @@ abline(h=mean(gene_sums),col="red")
 ```
 
 ```{r include=FALSE}
-df2 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp$X)))
 for (i in 1:length(comp$X)) {
   t = comp[i,2:101]
   x = which(t!=0)
@@ -137,7 +137,7 @@ abline(h=mean(gene_sums),col="red")
 ```
 
 ```{r include=FALSE}
-df3 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+df3 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp$X)))
 for (i in 1:length(comp$X)) {
   t = comp[i,2:101]
   x = which(t!=0)
@@ -201,7 +201,7 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
-df1 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp$X)) {
   t = comp[i,2:101]
   x = which(t!=0)
@@ -245,7 +245,7 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-df2 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp$X)) {
   t = comp[i,2:101]
   x = which(t!=0)
@@ -290,7 +290,7 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
-df3 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+df3 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp$X)) {
   t = comp[i,2:101]
   x = which(t!=0)
@@ -353,7 +353,7 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
-df1 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp$X)) {
   t = comp[i,2:101]
   x = which(t!=0)
@@ -397,7 +397,7 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-df2 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp$X)) {
   t = comp[i,2:101]
   x = which(t!=0)
@@ -442,11 +442,11 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
-df3 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
-for (i in 1:length(comp$X)) {
+df3 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
-  print(comp$X[i]) 
+  print(comp[i,1]) 
   genes = count[,x+1]
   df3[,i]= rowSums(genes)
 }
@@ -460,7 +460,7 @@ x = data.frame("X" =c(rep("s1",dim(df1)[1]),
                             rep("s3",dim(df3)[1])),
                      "Y"= c(geneNamesKey$KEY,geneNamesKey$KEY, geneNamesKey$KEY),
                       "Fill" = c(df1[,i],df2[,i],df3[,i]))
-print(paste("Cell type: ", comp$X[i]))
+print(paste("Cell type: ", comp[i,1]))
 plotList[[i]] = ggplot(x, aes(X, Y, fill= Fill)) + 
   geom_tile()+
   scale_fill_gradient(low="white", high="blue")
