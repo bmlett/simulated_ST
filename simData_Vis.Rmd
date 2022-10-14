@@ -5,8 +5,10 @@ params: args:myrg
 ---
 
 1. Install packages 
-```{r,echo=FALSE}
+```{r include=FALSE}
 library("SpatialExperiment")
+library(ggplot2)
+library(dbplyr)
 ```
 ### Set 1
 ## Toy Data seed 59
@@ -14,11 +16,15 @@ library("SpatialExperiment")
 ```{r label = "loading set 1 seed 59"}
 count = read.csv("set1/toy59/Counts_reformated.csv", sep=",")
 comp = read.csv("set1/toy59/synthetic_ST_seed59_1_composition.csv", sep = ",")
+geneNamesKey = data.frame("KEY" = 1:dim(count)[1], "Value"= count$X)
+ #spe = SpatialExperiment(assays=count[,2:101], rowData = geneNames)
 ```
 About the data... 
 c is the file containing count information with each row being genes (25,874) and each column spots (100)
 
 comp is the file containing cell type information with each row being a cell type (11) and each column the number per spot (100)
+
+spe - class spatial experiment 
 
 3. Data exploration
 ```{r}
@@ -27,6 +33,8 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
+
+
 ```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
@@ -34,10 +42,17 @@ plot(cT_sums, main="Scatter of counts per cell type", xlab = "Cell type", ylab="
 plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+
+
+```{r include=FALSE}
+df1 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df1[,i]= rowSums(genes)
+}
 ```
 Explore cell type more
 ```{r}
@@ -66,6 +81,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
+
 ```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
@@ -73,10 +89,16 @@ plot(cT_sums, main="Scatter of counts per cell type", xlab = "Cell type", ylab="
 plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+
+```{r include=FALSE}
+df2 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df2[,i]= rowSums(genes)
+}
 ```
 Explore cell type more
 ```{r}
@@ -113,17 +135,45 @@ plot(cT_sums, main="Scatter of counts per cell type", xlab = "Cell type", ylab="
 plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+
+```{r include=FALSE}
+df3 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df3[,i]= rowSums(genes)
+}
 ```
+
+```{r label = "Heatmaps set 1"}
+plotList = vector("list",dim(comp)[1])
+for(i in 1:dim(comp)[1]){
+x = data.frame("X" =c(rep("s1",dim(df1)[1]),
+                            rep("s2",dim(df2)[1]),
+                            rep("s3",dim(df3)[1])),
+                     "Y"= c(geneNamesKey$KEY,geneNamesKey$KEY, geneNamesKey$KEY),
+                      "Fill" = c(df1[,i],df2[,i],df3[,i]))
+print(paste("Cell type: ", comp$X[i]))
+plotList[[i]] = ggplot(x, aes(X, Y, fill= Fill)) + 
+  geom_tile()+
+  scale_fill_gradient(low="white", high="blue")
+}
+glist = lapply(plotList, ggplotGrob)
+print(marrangeGrob(glist, nrow=4, ncol = 3))
+
+```
+
+
 Explore cell type more
 ```{r}
 summary(cT_sums)
 comp$X[which(cT_sums==0)+1]
 comp$X[which(cT_sums >= 200)+1]
 ```
+
+
 ### Set 2
 ## Toy Data seed 416
 2. Load in data 
@@ -150,10 +200,15 @@ plot(cT_sums, main="Scatter of counts per cell type", xlab = "Cell type", ylab="
 plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+```{r include=FALSE}
+df1 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df1[,i]= rowSums(genes)
+}
 ```
 Explore cell type more
 ```{r}
@@ -190,9 +245,14 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+df2 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df2[,i]= rowSums(genes)
+}
 ```
 Explore cell type more
 ```{r}
@@ -229,11 +289,35 @@ plot(cT_sums, main="Scatter of counts per cell type", xlab = "Cell type", ylab="
 plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+```{r include=FALSE}
+df3 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df3[,i]= rowSums(genes)
+}
 ```
+
+```{r label = "Heatmaps set 2"}
+plotList = vector("list",dim(comp)[1])
+for(i in 1:dim(comp)[1]){
+x = data.frame("X" =c(rep("s1",dim(df1)[1]),
+                            rep("s2",dim(df2)[1]),
+                            rep("s3",dim(df3)[1])),
+                     "Y"= c(geneNamesKey$KEY,geneNamesKey$KEY, geneNamesKey$KEY),
+                      "Fill" = c(df1[,i],df2[,i],df3[,i]))
+print(paste("Cell type: ", comp$X[i]))
+plotList[[i]] = ggplot(x, aes(X, Y, fill= Fill)) + 
+  geom_tile()+
+  scale_fill_gradient(low="white", high="blue")
+}
+glist = lapply(plotList, ggplotGrob)
+print(marrangeGrob(glist, nrow=4, ncol = 3))
+
+```
+
 Explore cell type more
 ```{r}
 summary(cT_sums)
@@ -260,6 +344,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
+
 ```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
@@ -267,10 +352,15 @@ plot(cT_sums, main="Scatter of counts per cell type", xlab = "Cell type", ylab="
 plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+```{r include=FALSE}
+df1 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df1[,i]= rowSums(genes)
+}
 ```
 Explore cell type more
 ```{r}
@@ -307,9 +397,14 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+df2 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df2[,i]= rowSums(genes)
+}
 ```
 Explore cell type more
 ```{r}
@@ -346,10 +441,33 @@ plot(cT_sums, main="Scatter of counts per cell type", xlab = "Cell type", ylab="
 plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
-```{r}
-hist(count_sums, main="Distribution of summed counter per spot")
-hist(spot_sums, main="Distribution of summed cell types per spot")
-hist(cT_sums,main="Distribution of counter per cell type")
+```{r include=FALSE}
+df3 = data.frame(matrix(0,nrow=length(count$X),ncol = length(comp$X)))
+for (i in 1:length(comp$X)) {
+  t = comp[i,2:101]
+  x = which(t!=0)
+  print(comp$X[i]) 
+  genes = count[,x+1]
+  df3[,i]= rowSums(genes)
+}
+```
+
+```{r label = "Heatmaps set 3"}
+plotList = vector("list",dim(comp)[1])
+for(i in 1:dim(comp)[1]){
+x = data.frame("X" =c(rep("s1",dim(df1)[1]),
+                            rep("s2",dim(df2)[1]),
+                            rep("s3",dim(df3)[1])),
+                     "Y"= c(geneNamesKey$KEY,geneNamesKey$KEY, geneNamesKey$KEY),
+                      "Fill" = c(df1[,i],df2[,i],df3[,i]))
+print(paste("Cell type: ", comp$X[i]))
+plotList[[i]] = ggplot(x, aes(X, Y, fill= Fill)) + 
+  geom_tile()+
+  scale_fill_gradient(low="white", high="blue")
+}
+glist = lapply(plotList, ggplotGrob)
+print(marrangeGrob(glist, nrow=4, ncol = 3))
+
 ```
 Explore cell type more
 ```{r}
