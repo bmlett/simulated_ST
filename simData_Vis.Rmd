@@ -164,7 +164,7 @@ for (i in 1:length(comp[,1])) {
 } 
 ```
 
-```{r label = "Heatmaps set 1"}
+```{r eval=FALSE, include=FALSE, label= "Heatmaps set 1"}
 plotList = vector("list",dim(comp)[1])
 for(i in 1:dim(comp)[1]){
 x = data.frame("X" =c(rep("s1",dim(df1)[1]),
@@ -179,7 +179,6 @@ plotList[[i]] = ggplot(x, aes(X, Y, fill= Fill)) +
 }
 glist = lapply(plotList, ggplotGrob)
 print(marrangeGrob(glist, nrow=4, ncol = 3))
-
 ```
 
 
@@ -218,19 +217,19 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
-df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+df4 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
   if(length(x) > 1){
    genes = count[,x+1]
-   df1[,i]= rowSums(genes)
+   df4[,i]= rowSums(genes)
    } else if(length(x) ==1) {
-   df1[,i]= count[,x+1]
+   df4[,i]= count[,x+1]
    } else {
    print("Counts zero")
-   df1[,i] = 0 }
+   df4[,i] = 0 }
 } 
 ```
 Explore cell type more
@@ -268,19 +267,19 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+df5 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
   if(length(x) > 1){
    genes = count[,x+1]
-   df2[,i]= rowSums(genes)
+   df5[,i]= rowSums(genes)
    } else if(length(x) ==1) {
-   df2[,i]= count[,x+1]
+   df5[,i]= count[,x+1]
    } else {
    print("Counts zero")
-   df2[,i] = 0 }
+   df5[,i] = 0 }
 } 
 ```
 Explore cell type more
@@ -319,23 +318,23 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
-df3 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+df6 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
   if(length(x) > 1){
    genes = count[,x+1]
-   df3[,i]= rowSums(genes)
+   df6[,i]= rowSums(genes)
    } else if(length(x) ==1) {
-   df3[,i]= count[,x+1]
+   df6[,i]= count[,x+1]
    } else {
    print("Counts zero")
-   df3[,i] = 0 }
+   df6[,i] = 0 }
 } 
 ```
 
-```{r label = "Heatmaps set 2"}
+```{r eval=FALSE, include=FALSE, label= "Heatmaps set 2"}
 plotList = vector("list",dim(comp)[1])
 for(i in 1:dim(comp)[1]){
 x = data.frame("X" =c(rep("s1",dim(df1)[1]),
@@ -350,7 +349,6 @@ plotList[[i]] = ggplot(x, aes(X, Y, fill= Fill)) +
 }
 glist = lapply(plotList, ggplotGrob)
 print(marrangeGrob(glist, nrow=4, ncol = 3))
-
 ```
 
 Explore cell type more
@@ -388,19 +386,19 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
-df1 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+df7 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
   if(length(x) > 1){
    genes = count[,x+1]
-   df1[,i]= rowSums(genes)
+   df7[,i]= rowSums(genes)
    } else if(length(x) ==1) {
-   df1[,i]= count[,x+1]
+   df7[,i]= count[,x+1]
    } else {
    print("Counts zero")
-   df1[,i] = 0 }
+   df7[,i] = 0 }
 } 
 ```
 Explore cell type more
@@ -438,19 +436,19 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r}
-df2 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+df8 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
   if(length(x) > 1){
    genes = count[,x+1]
-   df2[,i]= rowSums(genes)
+   df8[,i]= rowSums(genes)
    } else if(length(x) ==1) {
-   df2[,i]= count[,x+1]
+   df8[,i]= count[,x+1]
    } else {
    print("Counts zero")
-   df2[,i] = 0 }
+   df8[,i] = 0 }
 } 
 ```
 Explore cell type more
@@ -489,23 +487,23 @@ plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total coun
 abline(h=mean(gene_sums),col="red")
 ```
 ```{r include=FALSE}
-df3 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
+df9 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp[,1])) {
   t = comp[i,2:101]
   x = which(t!=0)
   print(comp[i,1]) 
   if(length(x) > 1){
    genes = count[,x+1]
-   df3[,i]= rowSums(genes)
+   df9[,i]= rowSums(genes)
    } else if(length(x) ==1) {
-   df3[,i]= count[,x+1]
+   df9[,i]= count[,x+1]
    } else {
    print("Counts zero")
-   df3[,i] = 0 }
+   df9[,i] = 0 }
 } 
 ```
 
-```{r label = "Heatmaps set 3"}
+```{r eval=FALSE, include=FALSE, label="Heatmaps set 3"}
 plotList = vector("list",dim(comp)[1])
 for(i in 1:dim(comp)[1]){
 x = data.frame("X" =c(rep("s1",dim(df1)[1]),
@@ -520,7 +518,6 @@ plotList[[i]] = ggplot(x, aes(X, Y, fill= Fill)) +
 }
 glist = lapply(plotList, ggplotGrob)
 print(marrangeGrob(glist, nrow=4, ncol = 3))
-
 ```
 Explore cell type more
 ```{r}
@@ -528,3 +525,30 @@ summary(cT_sums)
 comp$X[which(cT_sums==0)+1]
 comp$X[which(cT_sums >= 200)+1]
 ```
+
+Create 12 heat maps- on per cell type with the different seeds on the X axis 
+```{r}
+plotList = vector("list",dim(comp)[1])
+for(i in 1:dim(comp)[1]){
+x = data.frame("X" =c(rep("s1s1",dim(df1)[1]),
+                            rep("s1s2",dim(df2)[1]),
+                            rep("s1s3",dim(df3)[1]),
+                      rep("s2s1",dim(df4)[1]),
+                            rep("s2s2",dim(df5)[1]),
+                            rep("s2s3",dim(df6)[1]),
+                      rep("s3s1",dim(df7)[1]),
+                            rep("s3s2",dim(df8)[1]),
+                            rep("s3s3",dim(df9)[1])),
+                     "Y"= c(rep(geneNamesKey$KEY,9)),
+                      "Fill" = c(df1[,i],df2[,i],df3[,i],
+                                 df4[,i],df5[,i],df6[,i],
+                                 df7[,i],df8[,i],df9[,i]))
+print(paste("Cell type: ", comp[i,1]))
+print(ggplot(x, aes(X, Y, fill= Fill)) + 
+  geom_tile()+
+  scale_fill_gradient(low="white", high="blue"))
+}
+#glist = lapply(plotList, ggplotGrob)
+#print(marrangeGrob(glist, nrow=4, ncol = 3))
+```
+
