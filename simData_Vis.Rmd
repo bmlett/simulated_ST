@@ -165,20 +165,47 @@ for (i in 1:length(comp[,1])) {
 ```
 
 ```{r eval=FALSE, include=FALSE, label= "Heatmaps set 1"}
-plotList = vector("list",dim(comp)[1])
+b=seq(0,25875,1725)
 for(i in 1:dim(comp)[1]){
 x = data.frame("X" =c(rep("s1",dim(df1)[1]),
                             rep("s2",dim(df2)[1]),
                             rep("s3",dim(df3)[1])),
                      "Y"= c(geneNamesKey$KEY,geneNamesKey$KEY, geneNamesKey$KEY),
-                      "Fill" = c(df1[,i],df2[,i],df3[,i]))
+                      "Fill" = c(df1[,i],
+                                 df2[,i],
+                                 df3[,i]))
 print(paste("Cell type: ", comp$X[i]))
-plotList[[i]] = ggplot(x, aes(X, Y, fill= Fill)) + 
-  geom_tile()+
-  scale_fill_gradient(low="white", high="blue")
+totals = c(as.character(sum(df1[,i])),as.character(sum(df2[,i])),
+           as.character(sum(df3[,i])))
+ggplot(x, aes(x=X, y=Y))+
+  geom_tile(aes(fill=Fill))+
+  scale_fill_gradient(low="white",high="Blue")+
+  coord_cartesian(clip = "off")+
+  #remove x and y axis labels
+  labs(x="", y="")+
+  #remove extra space
+  scale_y_continuous(breaks=b,expand=c(0, 0))+
+  #define new breaks on x-axis
+  scale_x_discrete(expand=c(0, 0))+
+  #set a base size for all fonts
+  theme_grey(base_size=8)+
+  #theme options
+  theme(
+    #bold font for legend text
+    legend.text=element_text(face="bold"),
+    #set thickness of axis ticks
+    axis.ticks=element_line(size=0.4),
+    #remove plot background
+    plot.background=element_blank(),
+    #remove plot border
+    panel.border=element_blank()
+  ) + coord_cartesian(clip = "off")+
+  annotate("text",x=1,y=-1,label=totals[1])+
+  annotate("text",x=2,y=-1,label=totals[2])+
+  annotate("text",x=3,y=-1,label=totals[3])
+
 }
-glist = lapply(plotList, ggplotGrob)
-print(marrangeGrob(glist, nrow=4, ncol = 3))
+
 ```
 
 
@@ -479,6 +506,7 @@ gene_sums = rowSums(count[2:25875,2:101])
 spot_sums = colSums(comp[2:12,2:101])
 cT_sums = rowSums(comp[2:12,2:101])
 ```
+
 ```{r}
 plot(count_sums,main="Scatter of summed expression per spot", xlab="Spots", ylab="Gene counts per spot (sum)")
 plot(spot_sums,main="Scatter of summed cell types per spot", xlab="Spots", ylab="Cell Type counts per spot (sum)")
@@ -486,6 +514,7 @@ plot(cT_sums, main="Scatter of counts per cell type", xlab = "Cell type", ylab="
 plot(gene_sums,main="Scatter of counts per gene", xlab="Genes", ylab="Total counts per gene")
 abline(h=mean(gene_sums),col="red")
 ```
+
 ```{r include=FALSE}
 df9 = data.frame(matrix(0,nrow=length(count[,1]),ncol = length(comp[,1])))
 for (i in 1:length(comp[,1])) {
@@ -528,27 +557,51 @@ comp$X[which(cT_sums >= 200)+1]
 
 Create 12 heat maps- on per cell type with the different seeds on the X axis 
 ```{r}
-plotList = vector("list",dim(comp)[1])
 for(i in 1:dim(comp)[1]){
-x = data.frame("X" =c(rep("s1s1",dim(df1)[1]),
-                            rep("s1s2",dim(df2)[1]),
-                            rep("s1s3",dim(df3)[1]),
-                      rep("s2s1",dim(df4)[1]),
-                            rep("s2s2",dim(df5)[1]),
-                            rep("s2s3",dim(df6)[1]),
-                      rep("s3s1",dim(df7)[1]),
-                            rep("s3s2",dim(df8)[1]),
-                            rep("s3s3",dim(df9)[1])),
-                     "Y"= c(rep(geneNamesKey$KEY,9)),
-                      "Fill" = c(df1[,i],df2[,i],df3[,i],
-                                 df4[,i],df5[,i],df6[,i],
-                                 df7[,i],df8[,i],df9[,i]))
+  x = as.data.frame(cbind(df1[,i],df2[,i],df3[,i],
+                          df4[,i],df5[,i],df6[,i],
+                          df7[,i],df8[,i],df9[,i]))
+  x$sums = rowSums(x)
+  table(x$sums > 0)
+  x =x[x$sums > 0,]
+  gKeys = geneNamesKey[geneNamesKey$KEY %in% row.names(x),]
+  y = data.frame("X" =c(rep("s1s1",dim(x)[1]),
+                            rep("s1s2",dim(x)[1]),
+                            rep("s1s3",dim(x)[1]),
+                      rep("s2s1",dim(x)[1]),
+                            rep("s2s2",dim(x)[1]),
+                            rep("s2s3",dim(x)[1]),
+                      rep("s3s1",dim(x)[1]),
+                            rep("s3s2",dim(x)[1]),
+                            rep("s3s3",dim(x)[1])),
+                     "Y"= c(rep(gKeys$KEY,9)),
+                      "Fill" = c(x[,1],x[,2],x[,i],
+                                 x[,4],x[,5],x[,i],
+                                 x[,7],x[,8],x[,i]))
+totals=colSums(x[,1:9])
 print(paste("Cell type: ", comp[i,1]))
-print(ggplot(x, aes(X, Y, fill= Fill)) + 
-  geom_tile()+
-  scale_fill_gradient(low="white", high="blue"))
+print(ggplot(y, aes(x=X, y=Y))+
+  geom_tile(aes(fill=Fill))+
+  scale_fill_gradient(low="white",high="Blue")+
+  #remove x and y axis labels
+  labs(x="", y="")+
+  #remove extra space
+  scale_y_continuous(expand=c(0, 0))+
+  #define new breaks on x-axis
+  scale_x_discrete(expand=c(0, 0))+
+  #set a base size for all fonts
+  theme_grey(base_size=8)+
+  #theme options
+  theme(
+    #bold font for legend text
+    legend.text=element_text(face="bold"),
+    #set thickness of axis ticks
+    axis.ticks=element_line(size=0.4),
+    #remove plot background
+    plot.background=element_blank(),
+    #remove plot border
+    panel.border=element_blank()
+  ))
+  print(totals)
 }
-#glist = lapply(plotList, ggplotGrob)
-#print(marrangeGrob(glist, nrow=4, ncol = 3))
 ```
-
