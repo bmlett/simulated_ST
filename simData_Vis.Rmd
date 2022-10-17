@@ -575,9 +575,9 @@ for(i in 1:dim(comp)[1]){
                             rep("s3s2",dim(x)[1]),
                             rep("s3s3",dim(x)[1])),
                      "Y"= c(rep(gKeys$KEY,9)),
-                      "Fill" = c(x[,1],x[,2],x[,i],
-                                 x[,4],x[,5],x[,i],
-                                 x[,7],x[,8],x[,i]))
+                      "Fill" = c(x[,1],x[,2],x[,3],
+                                 x[,4],x[,5],x[,6],
+                                 x[,7],x[,8],x[,9]))
 totals=colSums(x[,1:9])
 print(paste("Cell type: ", comp[i,1]))
 print(ggplot(y, aes(x=X, y=Y))+
